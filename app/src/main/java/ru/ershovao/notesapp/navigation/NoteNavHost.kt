@@ -4,10 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import ru.ershovao.notesapp.screens.Add
-import ru.ershovao.notesapp.screens.Main
-import ru.ershovao.notesapp.screens.Note
-import ru.ershovao.notesapp.screens.Start
+import ru.ershovao.notesapp.screens.AddScreen
+import ru.ershovao.notesapp.screens.MainScreen
+import ru.ershovao.notesapp.screens.NoteScreen
+import ru.ershovao.notesapp.screens.StartScreen
 
 sealed class NavRoutes(val route: String) {
     object Start : NavRoutes("start_screen")
@@ -21,16 +21,16 @@ fun NoteNavHost() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = NavRoutes.Start.route) {
         composable(NavRoutes.Start.route) {
-            Start(navController = navController)
+            StartScreen(navController = navController)
         }
         composable(NavRoutes.Main.route) {
-            Main(navController = navController)
+            MainScreen(navController = navController)
         }
         composable(NavRoutes.Add.route) {
-            Add(navController = navController)
+            AddScreen(navController = navController)
         }
         composable(NavRoutes.Note.route) {
-            Note(navController = navController)
+            NoteScreen(navController = navController)
         }
 
     }

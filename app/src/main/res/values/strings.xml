@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">NotesApp</string>
+    <string name="txt_what_use">What will we use?</string>
+    <string name="txt_firebase_database">Firebase database</string>
+    <string name="txt_room_database">Room database</string>
 </resources>
