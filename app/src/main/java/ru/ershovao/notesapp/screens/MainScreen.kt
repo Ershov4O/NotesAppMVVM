@@ -44,7 +44,7 @@ import ru.ershovao.notesapp.ui.theme.NotesAppTheme
 fun MainScreen(navController: NavHostController) {
     val context = LocalContext.current
     val viewModel: MainViewModel = viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
-    val notes = viewModel.readTest.observeAsState(listOf()).value
+//    val notes = viewModel.readTest.observeAsState(listOf()).value
 
     Scaffold(floatingActionButton = {
         FloatingActionButton(
@@ -59,11 +59,11 @@ fun MainScreen(navController: NavHostController) {
 //            NoteItem("Title 3", "Subtitle 3", navController)
 //            NoteItem("Title 4", "Subtitle 4", navController)
 //        }
-        LazyColumn(modifier = Modifier.padding(paddingValues)) {
-            items(notes) { note ->
-                NoteItem(note = note, navController = navController)
-            }
-        }
+//        LazyColumn(modifier = Modifier.padding(paddingValues)) {
+//            items(notes) { note ->
+//                NoteItem(note = note, navController = navController)
+//            }
+//        }
     }
 }
 
