@@ -9,9 +9,11 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.ershovao.notesapp.data.room.AppRoomDatabase
+import ru.ershovao.notesapp.data.room.repository.FirebaseRepository
 import ru.ershovao.notesapp.data.room.repository.RoomRepository
 import ru.ershovao.notesapp.model.Note
 import ru.ershovao.notesapp.utils.REPOSITORY
+import ru.ershovao.notesapp.utils.TYPE_FIREBASE
 import ru.ershovao.notesapp.utils.TYPE_ROOM
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -22,6 +24,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 val dao = AppRoomDatabase.getInstance(context = context).getRoomDao()
                 REPOSITORY = RoomRepository(dao)
                 onSuccess()
+            }
+
+            TYPE_FIREBASE -> {
+                REPOSITORY = FirebaseRepository()
+                REPOSITORY.connectToDatabase(
+                    onSuccess = {
+                        onSuccess()
+                    },
+                    onFailure = {
+                        Log.d("dataBaseInit", "ERROR: $it")
+                    }
+                )
             }
 
             else -> {}
