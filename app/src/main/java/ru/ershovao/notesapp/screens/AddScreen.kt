@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -32,7 +31,6 @@ import ru.ershovao.notesapp.model.Note
 import ru.ershovao.notesapp.navigation.NavRoutes
 import ru.ershovao.notesapp.ui.theme.NotesAppTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddScreen(navController: NavHostController, viewModel: MainViewModel) {
     var title by remember {
