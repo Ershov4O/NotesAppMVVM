@@ -5,8 +5,12 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import ru.ershovao.notesapp.data.room.AppRoomDatabase
 import ru.ershovao.notesapp.data.room.repository.RoomRepository
+import ru.ershovao.notesapp.model.Note
 import ru.ershovao.notesapp.utils.REPOSITORY
 import ru.ershovao.notesapp.utils.TYPE_ROOM
 
@@ -24,6 +28,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
         Log.d("dataBaseInit", "MainViewModel initDB with $type")
     }
+
+    fun addNote(note: Note, onSuccess: () -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            REPOSITORY.create(note) {
+                launch(Dispatchers.Main) {
+                    onSuccess()
+                }
+            }
+        }
+    }
+
+    fun readAllNotes() = REPOSITORY.readAll
 }
 
 class MainViewModelFactory(private val application: Application) : ViewModelProvider.Factory {

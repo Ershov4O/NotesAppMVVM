@@ -1,5 +1,6 @@
 package ru.ershovao.notesapp
 
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,6 +15,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.ershovao.notesapp.navigation.NoteNavHost
 import ru.ershovao.notesapp.ui.theme.NotesAppTheme
 
@@ -23,6 +26,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NotesAppTheme {
+                val viewModel: MainViewModel = viewModel(factory = MainViewModelFactory(applicationContext as Application))
                 Scaffold(topBar = {
                     TopAppBar(
                         title = { Text(text = "Notes app") },
@@ -43,7 +47,7 @@ class MainActivity : ComponentActivity() {
                             .fillMaxSize()
                             .padding(contentPadding)
                     ) {
-                        NoteNavHost()
+                        NoteNavHost(viewModel)
                     }
                 })
             }

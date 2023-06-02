@@ -41,10 +41,9 @@ import ru.ershovao.notesapp.ui.theme.NotesAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(navController: NavHostController) {
-    val context = LocalContext.current
-    val viewModel: MainViewModel = viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
+fun MainScreen(navController: NavHostController, viewModel: MainViewModel) {
 //    val notes = viewModel.readTest.observeAsState(listOf()).value
+    val notes = viewModel.readAllNotes().observeAsState(listOf()).value
 
     Scaffold(floatingActionButton = {
         FloatingActionButton(
@@ -53,17 +52,11 @@ fun MainScreen(navController: NavHostController) {
             Icon(imageVector = Icons.Filled.Add, contentDescription = "Add icon")
         }
     }) { paddingValues ->
-//        Column(modifier = Modifier.padding(paddingValues)) {
-//            NoteItem("Title", "Subtitle", navController)
-//            NoteItem("Title 2", "Subtitle 2", navController)
-//            NoteItem("Title 3", "Subtitle 3", navController)
-//            NoteItem("Title 4", "Subtitle 4", navController)
-//        }
-//        LazyColumn(modifier = Modifier.padding(paddingValues)) {
-//            items(notes) { note ->
-//                NoteItem(note = note, navController = navController)
-//            }
-//        }
+        LazyColumn(modifier = Modifier.padding(paddingValues)) {
+            items(notes) { note ->
+                NoteItem(note = note, navController = navController)
+            }
+        }
     }
 }
 
@@ -99,6 +92,8 @@ fun NoteItem(note: Note, navController: NavController) {
 @Composable
 fun PrevMain() {
     NotesAppTheme {
-        MainScreen(navController = rememberNavController())
+        val context = LocalContext.current
+        val viewModel: MainViewModel = viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
+        MainScreen(navController = rememberNavController(), viewModel = viewModel)
     }
 }
