@@ -8,6 +8,7 @@ import ru.ershovao.notesapp.utils.Constants.Keys.NOTES_TABLE
 data class Note(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val title: String,
-    val subTitle: String
+    val title: String = "",
+    val subTitle: String = "",
+    val firebaseId: String = ""
 )

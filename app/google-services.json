@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "555248675673",
+    "firebase_url": "https://notes-app-d75c2-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "notes-app-d75c2",
     "storage_bucket": "notes-app-d75c2.appspot.com"
   },

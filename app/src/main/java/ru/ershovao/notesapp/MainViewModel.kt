@@ -9,7 +9,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.ershovao.notesapp.data.room.AppRoomDatabase
-import ru.ershovao.notesapp.data.room.repository.FirebaseRepository
+import ru.ershovao.notesapp.data.firebase.repository.FirebaseRepository
 import ru.ershovao.notesapp.data.room.repository.RoomRepository
 import ru.ershovao.notesapp.model.Note
 import ru.ershovao.notesapp.utils.REPOSITORY
@@ -46,7 +46,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun addNote(note: Note, onSuccess: () -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
             REPOSITORY.create(note) {
-                launch(Dispatchers.Main) {
+                viewModelScope.launch(Dispatchers.Main) {
                     onSuccess()
                 }
             }

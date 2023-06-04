@@ -95,7 +95,7 @@ fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
                             LOGIN = login
                             PASSWORD = password
                             viewModel.initDB(TYPE_FIREBASE) {
-//                            navController.navigate(route = NavRoutes.Main.route)
+                                navController.navigate(route = NavRoutes.Main.route)
                                 scope.launch {
                                     bottomSheetState.hide()
                                 }.invokeOnCompletion {

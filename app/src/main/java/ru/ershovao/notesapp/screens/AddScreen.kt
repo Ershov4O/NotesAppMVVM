@@ -82,7 +82,7 @@ fun AddScreen(navController: NavHostController, viewModel: MainViewModel) {
                 enabled = isButtonEnabled,
                 onClick = {
                     viewModel.addNote(note = Note(title = title, subTitle = subTitle)) {
-                        navController.navigate(NavRoutes.Main.route)
+                        navController.popBackStack()
                     }
                 }) {
                 Text(text = "Save")
