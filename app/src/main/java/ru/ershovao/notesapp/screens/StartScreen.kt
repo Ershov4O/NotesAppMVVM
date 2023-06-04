@@ -96,7 +96,7 @@ fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
                             LOGIN = login
                             PASSWORD = password
                             viewModel.initDB(TYPE_FIREBASE) {
-                                DB_TYPE = TYPE_FIREBASE
+                                DB_TYPE.value = TYPE_FIREBASE
                                 navController.navigate(route = NavRoutes.Main.route)
                                 scope.launch {
                                     bottomSheetState.hide()
@@ -129,7 +129,7 @@ fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
             Button(
                 onClick = {
                     viewModel.initDB(TYPE_ROOM) {
-                        DB_TYPE = TYPE_ROOM
+                        DB_TYPE.value = TYPE_ROOM
                         navController.navigate(route = NavRoutes.Main.route)
                     }
                 },

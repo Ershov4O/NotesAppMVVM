@@ -1,8 +1,9 @@
 package ru.ershovao.notesapp.utils
 
+import androidx.compose.runtime.mutableStateOf
 import ru.ershovao.notesapp.data.DatabaseRepository
 
-lateinit var DB_TYPE: String
+var DB_TYPE = mutableStateOf("")
 const val TYPE_ROOM = "type_room"
 const val TYPE_FIREBASE = "type_firebase"
 

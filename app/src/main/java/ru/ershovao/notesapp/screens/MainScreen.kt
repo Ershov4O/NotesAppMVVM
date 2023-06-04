@@ -59,7 +59,7 @@ fun MainScreen(navController: NavHostController, viewModel: MainViewModel) {
 
 @Composable
 fun NoteItem(note: Note, navController: NavController) {
-    val noteId = when (DB_TYPE) {
+    val noteId = when (DB_TYPE.value) {
         TYPE_FIREBASE -> note.firebaseId
         TYPE_ROOM -> note.id
         else -> throw IllegalArgumentException("Unknown db type")
