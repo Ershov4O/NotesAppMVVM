@@ -2,6 +2,7 @@ package ru.ershovao.notesapp.utils
 
 import ru.ershovao.notesapp.data.DatabaseRepository
 
+lateinit var DB_TYPE: String
 const val TYPE_ROOM = "type_room"
 const val TYPE_FIREBASE = "type_firebase"
 
@@ -14,7 +15,7 @@ object Constants {
         const val ID = "note_id"
         const val NOTES_DATABASE = "notes_database"
         const val NOTES_TABLE = "notes_table"
-        const val FIREBASE_ID = "firebase_id"
+        const val FIREBASE_ID = "firebaseId"
         const val TITLE = "title"
         const val SUBTITLE = "subTitle"
     }

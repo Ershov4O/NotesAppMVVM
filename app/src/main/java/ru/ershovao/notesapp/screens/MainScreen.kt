@@ -34,6 +34,9 @@ import ru.ershovao.notesapp.MainViewModelFactory
 import ru.ershovao.notesapp.model.Note
 import ru.ershovao.notesapp.navigation.NavRoutes
 import ru.ershovao.notesapp.ui.theme.NotesAppTheme
+import ru.ershovao.notesapp.utils.DB_TYPE
+import ru.ershovao.notesapp.utils.TYPE_FIREBASE
+import ru.ershovao.notesapp.utils.TYPE_ROOM
 
 @Composable
 fun MainScreen(navController: NavHostController, viewModel: MainViewModel) {
@@ -56,11 +59,16 @@ fun MainScreen(navController: NavHostController, viewModel: MainViewModel) {
 
 @Composable
 fun NoteItem(note: Note, navController: NavController) {
+    val noteId = when (DB_TYPE) {
+        TYPE_FIREBASE -> note.firebaseId
+        TYPE_ROOM -> note.id
+        else -> throw IllegalArgumentException("Unknown db type")
+    }
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp, horizontal = 24.dp)
-            .clickable { navController.navigate(route = NavRoutes.Note.route + "/${note.id}") },
+            .clickable { navController.navigate(route = NavRoutes.Note.route + "/${noteId}") },
         elevation = CardDefaults.cardElevation(8.dp)
     ) {
         Column(

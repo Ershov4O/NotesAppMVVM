@@ -40,12 +40,25 @@ import kotlinx.coroutines.launch
 import ru.ershovao.notesapp.MainViewModel
 import ru.ershovao.notesapp.MainViewModelFactory
 import ru.ershovao.notesapp.model.Note
+import ru.ershovao.notesapp.utils.DB_TYPE
+import ru.ershovao.notesapp.utils.TYPE_FIREBASE
+import ru.ershovao.notesapp.utils.TYPE_ROOM
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NoteScreen(navController: NavHostController, viewModel: MainViewModel, noteId: String?) {
     val notes = viewModel.readAllNotes().observeAsState(listOf()).value
-    val note = notes.firstOrNull { it.id == noteId?.toInt() } ?: Note(title = "Title", subTitle = "Subtitle")
+    val note = when (DB_TYPE) {
+        TYPE_ROOM -> {
+            notes.firstOrNull { it.id == noteId?.toInt() }
+        }
+
+        TYPE_FIREBASE -> {
+            notes.firstOrNull { it.firebaseId == noteId }
+        }
+
+        else -> throw IllegalArgumentException("Unknown db type")
+    } ?: Note(title = "", subTitle = "")
     val openBottomSheet = rememberSaveable { mutableStateOf(false) }
     val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
@@ -91,7 +104,7 @@ fun NoteScreen(navController: NavHostController, viewModel: MainViewModel, noteI
                     )
                     Button(onClick = {
                         viewModel.updateNote(
-                            Note(id = note.id, title = title, subTitle = subtitle)
+                            Note(id = note.id, title = title, subTitle = subtitle, firebaseId = note.firebaseId)
                         ) {
                             scope.launch {
                                 bottomSheetState.hide()

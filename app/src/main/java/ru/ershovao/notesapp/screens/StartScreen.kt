@@ -40,6 +40,7 @@ import ru.ershovao.notesapp.MainViewModelFactory
 import ru.ershovao.notesapp.R
 import ru.ershovao.notesapp.navigation.NavRoutes
 import ru.ershovao.notesapp.ui.theme.NotesAppTheme
+import ru.ershovao.notesapp.utils.DB_TYPE
 import ru.ershovao.notesapp.utils.LOGIN
 import ru.ershovao.notesapp.utils.PASSWORD
 import ru.ershovao.notesapp.utils.TYPE_FIREBASE
@@ -95,6 +96,7 @@ fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
                             LOGIN = login
                             PASSWORD = password
                             viewModel.initDB(TYPE_FIREBASE) {
+                                DB_TYPE = TYPE_FIREBASE
                                 navController.navigate(route = NavRoutes.Main.route)
                                 scope.launch {
                                     bottomSheetState.hide()
@@ -127,6 +129,7 @@ fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
             Button(
                 onClick = {
                     viewModel.initDB(TYPE_ROOM) {
+                        DB_TYPE = TYPE_ROOM
                         navController.navigate(route = NavRoutes.Main.route)
                     }
                 },
